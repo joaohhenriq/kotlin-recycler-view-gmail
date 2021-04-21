@@ -2,6 +2,10 @@ package com.joaohhenriq.kotlinrecyclerviewgmail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +20,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: EmailAdapter
+    private var actionMode: ActionMode? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +40,64 @@ class MainActivity : AppCompatActivity() {
 
         val helper = ItemTouchHelper(
             ItemTouchHelper1(
-                ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+                /*ItemTouchHelper.UP or ItemTouchHelper.DOWN*/ 0,
                 ItemTouchHelper.LEFT
             )
         )
 
         helper.attachToRecyclerView(recycler_view_main)
+        adapter.onItemClick = {
+            enableActionMode(it)
+        }
+
+        adapter.onItemLongClick = {
+            enableActionMode(it)
+        }
+    }
+
+    private fun enableActionMode(position: Int) {
+        if(actionMode == null){
+            actionMode = startSupportActionMode(object : ActionMode.Callback {
+                override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+                    if(item?.itemId == R.id.action_delete) {
+                        adapter.deleteEmails()
+                        mode?.finish()
+                        return true
+                    }
+                    return false
+                }
+
+                override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                    mode?.menuInflater?.inflate(R.menu.menu_delete, menu)
+                    return true
+                }
+
+                override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                    return false
+                }
+
+                override fun onDestroyActionMode(mode: ActionMode?) {
+                    adapter.selectedItems.clear()
+                    adapter.emails
+                        .filter { it.selected }
+                        .forEach {it.selected = false}
+
+                    adapter.notifyDataSetChanged()
+                    actionMode = null
+                }
+
+            })
+
+            adapter.toggleSelection(position)
+            val size = adapter.selectedItems.size()
+
+            if(size == 0) {
+                actionMode?.finish()
+            } else {
+                actionMode?.title = "$size"
+                actionMode?.invalidate()
+            }
+        }
     }
 
     private fun addEmail() {
@@ -84,7 +141,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            TODO("Not yet implemented")
+            adapter.emails.removeAt(viewHolder.adapterPosition)
+            adapter.notifyItemRemoved(viewHolder.adapterPosition)
         }
 
     }

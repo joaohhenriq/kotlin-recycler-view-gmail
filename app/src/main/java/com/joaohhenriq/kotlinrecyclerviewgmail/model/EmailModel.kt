@@ -23,102 +23,139 @@ class EmailBuilder {
 
 fun email(block: EmailBuilder.() -> Unit): EmailModel = EmailBuilder().apply(block).build()
 
-fun fakeEmails() = listOf(
+fun fakeEmails(): MutableList<EmailModel> = mutableListOf(
     email {
         user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
-        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        preview = "Olá, você deseja mandar uma mensagem a um amigo?"
         date = "26 jun"
         stared = false
+        unread = true
     },
     email {
-        user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
-        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
+        user = "Youtube"
+        subject = "Bem vindo ao Youtube, ficamos muito felizes de tê-lo conosco!"
+        preview = "Olá, você deseja mandar uma mensagem a um amigo?"
         date = "26 jun"
         stared = false
-    },
-    email {
-        user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
-        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
-        date = "26 jun"
-        stared = false
-    },
-    email {
-        user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
-        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
-        date = "26 jun"
-        stared = false
-    },
-    email {
-        user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
-        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
-        date = "26 jun"
-        stared = false
-    },
-    email {
-        user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
-        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
-        date = "26 jun"
-        stared = false
+        unread = true
     },email {
         user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
+        date = "26 jun"
+        stared = true
+        unread = false
+    },
+    email {
+        user = "PicPay"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
+        date = "26 jun"
+        stared = true
+        unread = false
+    },
+    email {
+        user = "Tinder"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
         preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
         date = "26 jun"
         stared = false
+        unread = false
+    },
+    email {
+        user = "iFood"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
+        date = "26 jun"
+        stared = true
+        unread = false
+    },
+    email {
+        user = "Instagram"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
+        date = "26 jun"
+        stared = false
+        unread = false
     },
     email {
         user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
         preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
         date = "26 jun"
-        stared = false
+        stared = true
+        unread = false
     },
     email {
         user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
         preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
         date = "26 jun"
-        stared = false
+        stared = true
+        unread = false
     },
     email {
         user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
         preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
         date = "26 jun"
         stared = false
+        unread = false
     },
     email {
         user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
         preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
         date = "26 jun"
-        stared = false
+        stared = true
+        unread = false
     },
     email {
         user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
         preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
         date = "26 jun"
-        stared = false
+        stared = true
+        unread = false
     },
     email {
         user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
         preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
         date = "26 jun"
         stared = false
+        unread = false
     },
     email {
         user = "Facebook"
-        subject = "Olá, bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
+        date = "26 jun"
+        stared = true
+        unread = false
+    },
+    email {
+        user = "Facebook"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
         preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
         date = "26 jun"
         stared = false
+        unread = false
+    },email {
+        user = "Facebook"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
+        date = "26 jun"
+        stared = false
+        unread = false
+    },
+    email {
+        user = "Facebook"
+        subject = "Bem vindo ao Facebook, ficamos muito felizes de tê-lo conosco!"
+        preview = "Olá olá, você deseja mandar uma mensagem a um amigo?"
+        date = "26 jun"
+        stared = false
+        unread = false
     }
 )

@@ -2,7 +2,9 @@ package com.joaohhenriq.kotlinrecyclerviewgmail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.joaohhenriq.kotlinrecyclerviewgmail.adpater.EmailAdapter
 import com.joaohhenriq.kotlinrecyclerviewgmail.model.email
 import com.joaohhenriq.kotlinrecyclerviewgmail.model.fakeEmails
@@ -30,6 +32,15 @@ class MainActivity : AppCompatActivity() {
             addEmail()
             recycler_view_main.scrollToPosition(0)
         }
+
+        val helper = ItemTouchHelper(
+            ItemTouchHelper1(
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+                ItemTouchHelper.LEFT
+            )
+        )
+
+        helper.attachToRecyclerView(recycler_view_main)
     }
 
     private fun addEmail() {
@@ -48,9 +59,33 @@ class MainActivity : AppCompatActivity() {
                     val newWord: String = Fakeit.lorem().words()
                     add(newWord)
                 }
-            }.joinToString( " " )
+            }.joinToString(" ")
         })
 
         adapter.notifyItemInserted(0)
+    }
+
+    inner class ItemTouchHelper1(dragDirs: Int, swipeDirs: Int) :
+        androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback(
+            dragDirs, swipeDirs
+        ) {
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            val from = viewHolder.adapterPosition
+            val to = target.adapterPosition
+
+            Collections.swap(adapter.emails, from, to)
+            adapter.notifyItemMoved(from, to)
+
+            return true
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            TODO("Not yet implemented")
+        }
+
     }
 }
